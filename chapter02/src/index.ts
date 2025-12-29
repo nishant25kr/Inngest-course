@@ -48,6 +48,26 @@ app.post('/test', async (req, res) => {
     }
 })
 
+app.post('/test-multi', async (req,res) => {
+    try {
+        
+        console.log("seding multi step test request")
+        const {ids} = await inngest.send({
+            name: "test/multi-step-demo",
+            data: {
+                userId: 2121,
+                action: "demo"
+            }
+        })
+        console.log("Event send with id : ",ids[0]);
+
+        res.send(ids)
+
+    } catch (error) {
+        console.log(error);      
+    }
+})
+
 app.listen(PORT, () => {
     console.log("Express app is running at : ", PORT)
 })
